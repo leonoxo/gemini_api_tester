@@ -12,25 +12,64 @@
 
 ## 🚀 開始使用
 
-### 先決條件
+有兩種主要的使用方式：**透過 Docker（推薦）** 或 **直接使用 Python**。
 
-- Python 3.x
-- Google Generative AI Python SDK
+### 🐳 透過 Docker 執行 (推薦)
 
-### 安裝
+使用 Docker 可以免去管理 Python 環境和依賴性的麻煩，確保程式在任何地方都能以相同的方式運行。
 
-1.  克隆此儲存庫至您的本地電腦：
+**先決條件**:
+- [Docker](https://www.docker.com/get-started) 已安裝在您的系統上。
+
+**執行步驟**:
+
+1.  **克隆儲存庫**:
     ```bash
     git clone https://github.com/leonoxo/Gemini_API_Tester.git
     cd Gemini_API_Tester
     ```
 
-2.  安裝所需的 Python 套件：
+2.  **建立 Docker 映像檔**:
+    在專案根目錄下，執行以下指令來建立一個名為 `gemini-tester` 的 Docker 映像檔。
     ```bash
-    pip install google-generativeai
+    docker build -t gemini-tester .
     ```
 
-### 📝 使用流程
+3.  **執行容器化腳本**:
+    - **清理金鑰**:
+      將您的原始金鑰放入 `check_keys.txt`，然後執行以下指令。`-v` 參數會將您當前的目錄掛載到容器的 `/app` 目錄，讓容器可以讀寫您的 `.txt` 檔案。
+      ```bash
+      docker run --rm -v "$(pwd):/app" gemini-tester python check_for_duplicate_keys.py
+      ```
+      將終端輸出的乾淨金鑰列表貼到 `api_keys.txt`。
+
+    - **驗證金鑰**:
+      ```bash
+      docker run --rm -v "$(pwd):/app" gemini-tester python gemini_api_tester.py
+      ```
+      測試完成後，包含有效金鑰的 `api_keys_verified_YYYYMMDD.txt` 檔案會出現在您的專案目錄中。
+
+---
+
+### 🐍 直接使用 Python 執行
+
+**先決條件**:
+- Python 3.x
+
+**安裝**:
+
+1.  **克隆儲存庫**:
+    ```bash
+    git clone https://github.com/leonoxo/Gemini_API_Tester.git
+    cd Gemini_API_Tester
+    ```
+
+2.  **安裝依賴**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+**使用流程**:
 
 1.  **步驟一：準備金鑰**
     將您收集到的所有原始 API 金鑰（可能包含重複或格式混亂）貼到 `check_keys.txt` 檔案中。
