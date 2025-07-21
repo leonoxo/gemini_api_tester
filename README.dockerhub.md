@@ -2,7 +2,7 @@
 
 這是一個用於批量驗證 Google Gemini API 金鑰有效性的 Python 工具。此 Docker 映像檔包含所有必要的依賴項，讓您可以免於設定 Python 環境，直接執行測試。
 
-**GitHub 儲存庫**: [https://github.com/leonoxo/Gemini_API_Tester](https://github.com/leonoxo/Gemini_API_Tester)
+**GitHub 儲存庫**: [https://github.com/leonoxo/gemini_api_tester](https://github.com/leonoxo/gemini_api_tester)
 
 ## 如何拉取映像檔
 
