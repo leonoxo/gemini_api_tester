@@ -30,9 +30,9 @@
     ```
 
 2.  **建立 Docker 映像檔**:
-    在專案根目錄下，執行以下指令來建立一個名為 `gemini-tester` 的 Docker 映像檔。
+    在專案根目錄下，執行以下指令來建立一個名為 `leonoxo/gemini_api_tester` 的 Docker 映像檔。
     ```bash
-    docker build -t gemini-tester .
+    docker build -t leonoxo/gemini_api_tester .
     ```
 
 3.  **執行容器化腳本**:
@@ -41,7 +41,7 @@
       - 將您的原始金鑰放入 `check_keys.txt`。
       - 執行以下指令。`-v` 參數會將您當前的目錄掛載到容器的 `/app` 目錄，讓容器可以讀寫您的 `.txt` 檔案。
       ```bash
-      docker run --rm -v "$(pwd):/app" gemini-tester python check_for_duplicate_keys.py
+      docker run --rm -v "$(pwd):/app" leonoxo/gemini_api_tester python check_for_duplicate_keys.py
       ```
       - 將終端輸出的乾淨金鑰列表貼到 `api_keys.txt` (如果需要，請先從 `api_keys.txt.example` 複製)。
     
@@ -49,7 +49,7 @@
       - 確保 `api_keys.txt` 已包含清理後的金鑰。
       - 執行以下指令：
       ```bash
-      docker run --rm -v "$(pwd):/app" gemini-tester python gemini_api_tester.py
+      docker run --rm -v "$(pwd):/app" leonoxo/gemini_api_tester python gemini_api_tester.py
       ```
       測試完成後，包含有效金鑰的 `api_keys_verified_YYYYMMDD.txt` 檔案會出現在您的專案目錄中。
 
