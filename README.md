@@ -64,8 +64,8 @@
 
 1.  **克隆儲存庫**:
     ```bash
-    git clone https://github.com/leonoxo/Gemini_API_Tester.git
-    cd Gemini_API_Tester
+    git clone https://github.com/leonoxo/gemini_api_tester.git
+    cd gemini_api_tester
     ```
 
 2.  **安裝依賴**:
