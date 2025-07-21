@@ -37,13 +37,17 @@
 
 3.  **執行容器化腳本**:
     - **清理金鑰**:
-      將您的原始金鑰放入 `check_keys.txt`，然後執行以下指令。`-v` 參數會將您當前的目錄掛載到容器的 `/app` 目錄，讓容器可以讀寫您的 `.txt` 檔案。
+      - 將 `check_keys.txt.example` 複製為 `check_keys.txt`。
+      - 將您的原始金鑰放入 `check_keys.txt`。
+      - 執行以下指令。`-v` 參數會將您當前的目錄掛載到容器的 `/app` 目錄，讓容器可以讀寫您的 `.txt` 檔案。
       ```bash
       docker run --rm -v "$(pwd):/app" gemini-tester python check_for_duplicate_keys.py
       ```
-      將終端輸出的乾淨金鑰列表貼到 `api_keys.txt`。
-
+      - 將終端輸出的乾淨金鑰列表貼到 `api_keys.txt` (如果需要，請先從 `api_keys.txt.example` 複製)。
+    
     - **驗證金鑰**:
+      - 確保 `api_keys.txt` 已包含清理後的金鑰。
+      - 執行以下指令：
       ```bash
       docker run --rm -v "$(pwd):/app" gemini-tester python gemini_api_tester.py
       ```
@@ -72,7 +76,8 @@
 **使用流程**:
 
 1.  **步驟一：準備金鑰**
-    將您收集到的所有原始 API 金鑰（可能包含重複或格式混亂）貼到 `check_keys.txt` 檔案中。
+    - 將 `check_keys.txt.example` 複製為 `check_keys.txt`。
+    - 將您收集到的所有原始 API 金鑰（可能包含重複或格式混亂）貼到 `check_keys.txt` 檔案中。
 
 2.  **步驟二：清理與去重**
     執行 `check_for_duplicate_keys.py` 腳本來清理金鑰：
@@ -82,7 +87,8 @@
     此腳本會將整理好的、不重複的金鑰列表輸出到終端機。
 
 3.  **步驟三：準備測試**
-    將終端機中輸出的乾淨金鑰列表複製並完全覆蓋到 `api_keys.txt` 檔案中。
+    - 將 `api_keys.txt.example` 複製為 `api_keys.txt`。
+    - 將終端機中輸出的乾淨金鑰列表複製並完全覆蓋到 `api_keys.txt` 檔案中。
 
 4.  **步驟四：執行驗證**
     執行主測試腳本 `gemini_api_tester.py`：

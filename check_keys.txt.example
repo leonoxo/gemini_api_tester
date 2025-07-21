@@ -1,0 +1,14 @@
+# 這是一個用於檢查和清理 API 金鑰的範例檔案 (check_keys.txt)。
+# 請將此檔案重新命名為 "check_keys.txt"，並在下方貼上您所有原始的、未經整理的 API 金鑰。
+#
+# - `check_for_duplicate_keys.py` 腳本會讀取此檔案。
+# - 格式可以混亂，例如包含重複的金鑰、多餘的空格或引號。
+#
+# 範例格式：
+#
+# "AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+# AIzaSyYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+#
+# AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+#
+# AIzaSyZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ

@@ -1,0 +1,11 @@
+# 這是一個 API 金鑰的範例檔案 (api_keys.txt)。
+# 請將此檔案重新命名為 "api_keys.txt"，並在下方填入您自己的 Google Gemini API 金鑰。
+#
+# - 每一行代表一個 API 金鑰。
+# - 確保金鑰前後沒有多餘的空格。
+# - 此處的金鑰是經過 `check_for_duplicate_keys.py` 清理後的乾淨金鑰。
+#
+# 範例格式：
+# AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+# AIzaSyYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
+# AIzaSyZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
