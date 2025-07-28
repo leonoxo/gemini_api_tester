@@ -13,12 +13,12 @@ COPY requirements.txt .
 # --no-cache-dir 選項可以減少映像檔大小
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 步驟 5: 將您的應用程式程式碼複製到容器中
+# 步驟 5: 建立一個用於存放資料的目錄
+RUN mkdir /data
+
+# 步驟 6: 將您的應用程式程式碼複製到容器中
 COPY *.py ./
 
-# 步驟 6: 設定容器啟動時的預設指令
-# 由於有兩個主要腳本，我們不設定固定的 ENTRYPOINT。
-# 使用者可以在 `docker run` 指令中輕鬆指定要執行的腳本，提供更大的靈活性。
-# 例如: docker run <image_name> python check_for_duplicate_keys.py
-# 或:   docker run <image_name> python gemini_api_tester.py
-CMD ["python"]
+# 步驟 7: 設定容器啟動時的預設指令
+# 預設執行主測試腳本
+CMD ["python", "gemini_api_tester.py"]

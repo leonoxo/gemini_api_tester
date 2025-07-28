@@ -173,7 +173,7 @@ class GeminiAPITester:
 
         current_date_str = datetime.datetime.now().strftime("%Y%m%d")
         verified_keys_filename = f"api_keys_verified_{current_date_str}.txt"
-        verified_keys_filepath = self.script_dir / verified_keys_filename
+        verified_keys_filepath = Path("/data") / verified_keys_filename
 
         try:
             with open(verified_keys_filepath, 'w', encoding='utf-8') as vf:
@@ -269,7 +269,8 @@ class GeminiAPITester:
 
 def main() -> None:
     """主函數，啟動 Gemini API 密鑰有效性測試。"""
-    api_keys_path = Path(__file__).parent / API_TESTER_CONFIG["API_KEYS_FILE"]
+    # 將金鑰檔案的路徑指向 /data 目錄，以便於 Docker 掛載
+    api_keys_path = Path("/data") / API_TESTER_CONFIG["API_KEYS_FILE"]
     tester = GeminiAPITester(api_keys_path)
     tester.run_tests()
 

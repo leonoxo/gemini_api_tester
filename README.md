@@ -39,17 +39,17 @@
     - **清理金鑰**:
       - 將 `check_keys.txt.example` 複製為 `check_keys.txt`。
       - 將您的原始金鑰放入 `check_keys.txt`。
-      - 執行以下指令。`-v` 參數會將您當前的目錄掛載到容器的 `/app` 目錄，讓容器可以讀寫您的 `.txt` 檔案。
+      - 執行以下指令。`-v` 參數會將您當前的目錄掛載到容器的 `/data` 目錄，讓容器可以讀寫您的 `.txt` 檔案。
       ```bash
-      docker run --rm -v "$(pwd):/app" leonoxo/gemini_api_tester python check_for_duplicate_keys.py
+      docker run --rm -v "$(pwd):/data" leonoxo/gemini_api_tester python check_for_duplicate_keys.py
       ```
       - 將終端輸出的乾淨金鑰列表貼到 `api_keys.txt` (如果需要，請先從 `api_keys.txt.example` 複製)。
     
     - **驗證金鑰**:
       - 確保 `api_keys.txt` 已包含清理後的金鑰。
-      - 執行以下指令：
+      - 執行以下指令。容器會自動執行主測試腳本：
       ```bash
-      docker run --rm -v "$(pwd):/app" leonoxo/gemini_api_tester python gemini_api_tester.py
+      docker run --rm -v "$(pwd):/data" leonoxo/gemini_api_tester
       ```
       測試完成後，包含有效金鑰的 `api_keys_verified_YYYYMMDD.txt` 檔案會出現在您的專案目錄中。
 

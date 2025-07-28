@@ -22,7 +22,7 @@ docker pull leonoxo/gemini_api_tester:latest
 2.  **步驟一：清理金鑰**
     將您收集到的所有原始 API 金鑰貼到 `check_keys.txt` 檔案中。然後在該目錄下執行以下指令來清理和去除重複的金鑰：
     ```bash
-    docker run --rm -v "$(pwd):/app" leonoxo/gemini_api_tester python check_for_duplicate_keys.py
+    docker run --rm -v "$(pwd):/data" leonoxo/gemini_api_tester python check_for_duplicate_keys.py
     ```
     此指令會將整理好的、不重複的金鑰列表輸出到您的終端機。
 
@@ -32,7 +32,7 @@ docker pull leonoxo/gemini_api_tester:latest
 4.  **步驟三：執行驗證**
     執行以下指令來開始驗證 `api_keys.txt` 中的所有金鑰：
     ```bash
-    docker run --rm -v "$(pwd):/app" leonoxo/gemini_api_tester python gemini_api_tester.py
+    docker run --rm -v "$(pwd):/data" leonoxo/gemini_api_tester
     ```
 
 5.  **步驟四：獲取結果**
@@ -42,7 +42,7 @@ docker pull leonoxo/gemini_api_tester:latest
 
 -   `docker run`: 執行 Docker 容器。
 -   `--rm`: 容器執行完畢後自動刪除，保持系統乾淨。
--   `-v "$(pwd):/app"`: **(關鍵部分)** 這會將您當前的主機目錄（`$(pwd)`）掛載到容器內的 `/app` 目錄。這使得容器內的腳本可以讀取您本地的 `api_keys.txt` 和 `check_keys.txt`，並將結果 `api_keys_verified_...txt` 寫回到您本地的目錄。
+-   `-v "$(pwd):/data"`: **(關鍵部分)** 這會將您當前的主機目錄（`$(pwd)`）掛載到容器內的 `/data` 目錄。這使得容器內的腳本可以讀取您本地的 `api_keys.txt` 和 `check_keys.txt`，並將結果 `api_keys_verified_...txt` 寫回到您本地的目錄。
 -   `leonoxo/gemini_api_tester`: 您要執行的映像檔名稱。
 -   `python <script_name>.py`: 在容器內要執行的指令。
 

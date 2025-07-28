@@ -41,7 +41,7 @@ def 整理並去重API_Key(原始文本: str) -> list[str]:
 
 # 主程式邏輯
 if __name__ == "__main__":
-    api_key_file_path = "check_keys.txt"
+    api_key_file_path = "/data/check_keys.txt"
     輸入的API_Key內容 = "" # 初始化變數
     try:
         with open(api_key_file_path, 'r', encoding='utf-8') as f:
