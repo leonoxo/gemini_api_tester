@@ -32,10 +32,13 @@ def 整理並去重API_Key(原始文本: str) -> list[str]:
     #    - if key.strip(): 確保不是空字串或僅包含空白的字串
     已處理的Key列表 = [key.strip() for key in 所有可能的Key列表 if key.strip()]
 
-    # 5. 去除重複的 Key 並排序
+    # 5. 過濾掉長度不符合標準 (39個字元) 的 Key
+    有效的Key列表 = [key for key in 已處理的Key列表 if len(key) == 39]
+
+    # 6. 去除重複的 Key 並排序
     #    - 使用 set 資料結構自動去重
     #    - 再轉換回 list 並使用 sorted() 排序，使輸出結果具有一致性
-    不重複的Key列表 = sorted(list(set(已處理的Key列表)))
+    不重複的Key列表 = sorted(list(set(有效的Key列表)))
 
     return 不重複的Key列表
 
