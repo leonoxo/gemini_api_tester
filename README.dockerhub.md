@@ -14,10 +14,20 @@ docker pull leonoxo/gemini_api_tester:latest
 
 此工具包含兩個主要腳本，您需要透過掛載本地目錄的方式來讓容器讀寫您的金鑰檔案。
 
-### 工作流程
+### 新增功能：API Key 爬蟲
+
+除了金鑰驗證，此專案現在還提供一個強大的 API 金鑰爬蟲工具 (`api_key_scraper.py`)。
+
+**請注意**：此爬蟲工具是一個**本地腳本**，它需要您手動設定包含個人登入憑證的 `config.json` 檔案。因此，它**不適合**也**不建議**直接在 Docker 容器內執行。
+
+您應該在本地克隆 [GitHub 儲存庫](https://github.com/leonoxo/gemini_api_tester)，並按照儲存庫中 `README.md` 的說明來設定和執行爬蟲，以獲取最新的 API 金鑰。爬取完成後，您可以將得到的 `found_api_keys.txt` 作為後續金鑰驗證的來源。
+
+---
+
+### Docker 工作流程 (金鑰驗證)
 
 1.  **準備金鑰檔案**
-    在您電腦的任何一個工作目錄下，建立 `check_keys.txt` 和 `api_keys.txt` 這兩個檔案。
+    在您電腦的任何一個工作目錄下，建立 `check_keys.txt` 和 `api_keys.txt` 這兩個檔案。您可以從執行本地爬蟲得到的 `found_api_keys.txt` 開始。
 
 2.  **步驟一：清理金鑰**
     將您收集到的所有原始 API 金鑰貼到 `check_keys.txt` 檔案中。然後在該目錄下執行以下指令來清理和去除重複的金鑰：
