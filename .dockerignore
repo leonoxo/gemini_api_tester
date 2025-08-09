@@ -1,0 +1,23 @@
+# Git files
+.git
+.gitignore
+
+# Docker files
+.dockerignore
+Dockerfile
+
+# Python virtual environment
+.venv/
+
+# Configuration files with sensitive data
+config.json
+
+# Text files that might contain keys
+api_keys.txt
+check_keys.txt
+found_api_keys.txt
+api_keys_verified_*.txt
+
+# Python cache
+__pycache__/
+*.pyc
