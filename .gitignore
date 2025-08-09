@@ -1,2 +1,9 @@
-# 忽略所有文字檔，因為它們可能包含敏感的 API 金鑰
+# 忽略包含敏感資訊的設定檔
+config.json
+
+# 忽略包含 API 金鑰的輸出檔案
 *.txt
+found_api_keys.txt
+
+# 忽略 Python 虛擬環境
+.venv/
