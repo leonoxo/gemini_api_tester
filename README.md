@@ -8,9 +8,41 @@
 - **金鑰清理**：提供輔助腳本，用於移除重複的金鑰並整理格式。
 - **詳細日誌**：在測試過程中提供清晰的日誌輸出，方便追蹤狀態。
 - **結果保存**：自動將通過驗證的有效金鑰保存到新的檔案中。
+- **回應狀態分類 (新功能)**：提供 `gemini_api_response_analyzer.py` 腳本，可將金鑰根據 API 回應 (成功 vs. 請求過多) 進行分類。
 - **安全設計**：預設使用 `.gitignore` 忽略所有 `.txt` 檔案，避免 API 金鑰意外洩漏至版本控制中。
 
-## 🕷️ API Key 爬蟲 (新增功能)
+## 📊 新功能：API 回應分析器
+
+除了原有的金鑰有效性驗證 (`gemini_api_tester.py`)，本專案現在提供一個新的分析腳本 `gemini_api_response_analyzer.py`。
+
+此腳本專門用於區分「正常可用」和「因請求過多而暫時受限」的 API 金鑰。
+
+### 功能
+
+- **狀態分類**：測試金鑰並根據 API 回應的 HTTP 狀態碼進行分類。
+- **獨立輸出**：
+  - 成功 (200 OK) 的金鑰儲存於 `YYYYMMDD_200.txt`。
+  - 請求過多 (429 Too Many Requests) 的金鑰儲存於 `YYYYMMDD_429.txt`。
+- **使用場景**：幫助您從大量金鑰中篩選出當前可用的金鑰，並將可能只是暫時達到配額上限的金鑰分開管理。
+
+### 使用方式
+
+使用方法與主驗證腳本類似，您可以透過 Docker 或直接使用 Python 執行。
+
+- **Docker 執行**:
+  ```bash
+  docker run --rm -v "$(pwd):/data" leonoxo/gemini_api_tester python gemini_api_response_analyzer.py
+  ```
+
+- **Python 執行**:
+  ```bash
+  python gemini_api_response_analyzer.py
+  ```
+結果會直接輸出到您專案目錄下的對應 `.txt` 檔案中。
+
+---
+
+## �️ API Key 爬蟲 (新增功能)
 
 本專案現在包含一個 `api_key_scraper.py` 腳本，可以自動從 [geminikeyseeker.o0o.moe](https://geminikeyseeker.o0o.moe/) 網站爬取所有分頁的 API 金鑰。
 
@@ -94,6 +126,12 @@
       ```
       測試完成後，包含有效金鑰的 `api_keys_verified_YYYYMMDD.txt` 檔案會出現在您的專案目錄中。
 
+    - **執行回應分析 (新功能)**:
+      ```bash
+      docker run --rm -v "$(pwd):/data" leonoxo/gemini_api_tester python gemini_api_response_analyzer.py
+      ```
+      執行後會產生 `YYYYMMDD_200.txt` 和 `YYYYMMDD_429.txt` 檔案。
+
 ---
 
 ### 🐍 直接使用 Python 執行
@@ -138,8 +176,14 @@
     ```
     腳本會開始測試，並顯示詳細進度。
 
+4.  **步驟四之二：執行回應分析 (可選)**
+   如果您需要區分金鑰的具體狀態，可以執行新的分析腳本：
+   ```bash
+   python gemini_api_response_analyzer.py
+   ```
+
 5.  **步驟五：獲取結果**
-    測試完成後，所有有效的金鑰將被保存在一個新檔案中，檔名格式為 `api_keys_verified_YYYYMMDD.txt`。
+    測試完成後，所有有效的金鑰將被保存在一個新檔案中，檔名格式為 `api_keys_verified_YYYYMMDD.txt`。如果執行了回應分析腳本，還會額外產生 `YYYYMMDD_200.txt` 和 `YYYYMMDD_429.txt`。
 
 ## ⚠️ 安全提醒
 

@@ -48,6 +48,20 @@ docker pull leonoxo/gemini_api_tester:latest
 5.  **步驟四：獲取結果**
     測試完成後，一個名為 `api_keys_verified_YYYYMMDD.txt` 的新檔案將會出現在您的工作目錄中，裡面包含了所有通過驗證的 API 金鑰。
 
+### 新增功能：執行 API 回應分析
+
+如果您需要更詳細地了解金鑰的狀態，而不僅僅是「有效」或「無效」，您可以使用 `gemini_api_response_analyzer.py` 腳本。
+
+**執行指令**:
+```bash
+docker run --rm -v "$(pwd):/data" leonoxo/gemini_api_tester python gemini_api_response_analyzer.py
+```
+
+**分析結果**:
+執行此腳本後，會在您的工作目錄中產生兩個檔案：
+-   `YYYYMMDD_200.txt`: 包含所有測試成功 (200 OK) 的金鑰。
+-   `YYYYMMDD_429.txt`: 包含所有因請求過多 (429 Too Many Requests) 而暫時受限的金鑰。
+
 ### 指令詳解
 
 -   `docker run`: 執行 Docker 容器。
