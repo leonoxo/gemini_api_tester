@@ -133,8 +133,9 @@ class GeminiAPIResponseAnalyzer:
         檔案名稱格式為 YYYYMMDD_200.txt 和 YYYYMMDD_429.txt。
         """
         current_date_str = datetime.datetime.now().strftime("%Y%m%d")
-        path_200 = Path(".") / f"{current_date_str}_200.txt"
-        path_429 = Path(".") / f"{current_date_str}_429.txt"
+        base_path = Path("/data") if Path("/data").exists() else Path(".")
+        path_200 = base_path / f"{current_date_str}_200.txt"
+        path_429 = base_path / f"{current_date_str}_429.txt"
 
         try:
             if self.keys_200:
@@ -217,8 +218,15 @@ class GeminiAPIResponseAnalyzer:
 
 def main() -> None:
     """主函數，啟動 Gemini API 回應分析。"""
-    api_keys_path = Path(API_ANALYZER_CONFIG["API_KEYS_FILE"])
+    # 判斷執行環境：如果 /data 目錄存在 (Docker 環境)，則使用 /data，否則使用當前目錄 (本地環境)
+    base_path = Path("/data") if Path("/data").exists() else Path(".")
+    api_keys_path = base_path / API_ANALYZER_CONFIG["API_KEYS_FILE"]
+    
     analyzer = GeminiAPIResponseAnalyzer(api_keys_path)
+    
+    # 同樣地，我們需要確保儲存路徑也遵循這個邏輯。
+    # 這裡我們直接修改類別實例的屬性，或者在初始化時傳入 base_path。
+    # 為了簡潔，我們在儲存函數中直接使用這個邏輯。
     analyzer.run_tests()
 
 
