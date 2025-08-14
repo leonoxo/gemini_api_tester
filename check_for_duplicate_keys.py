@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # 程式碼功能：整理並去除重複的 API Key
+from pathlib import Path
 
 def 整理並去重API_Key(原始文本: str) -> list[str]:
     """
@@ -44,7 +45,9 @@ def 整理並去重API_Key(原始文本: str) -> list[str]:
 
 # 主程式邏輯
 if __name__ == "__main__":
-    api_key_file_path = "/data/check_keys.txt"
+    # 判斷執行環境：如果 /data 目錄存在 (Docker 環境)，則使用 /data，否則使用當前目錄 (本地環境)
+    base_path = Path("/data") if Path("/data").exists() else Path(".")
+    api_key_file_path = base_path / "check_keys.txt"
     輸入的API_Key內容 = "" # 初始化變數
     try:
         with open(api_key_file_path, 'r', encoding='utf-8') as f:
